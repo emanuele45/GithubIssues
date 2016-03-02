@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.elkarte.net/site/package-info">
+<package-info xmlns="http://www.elkarte.net/site/package-info" xmlns:elk="http://www.elkarte.net/">
+	<license><![CDATA[
+/**
+ * Github Issues
+ *
+ * @author  emanuele
+ * @license BSD http://opensource.org/licenses/BSD-3-Clause
+ *
+ * @version 0.0.1
+ */
+	]]></license>
+	<id>emanuele:GithubIssues</id>
+	<name>Github Issues</name>
+	<version>0.0.1</version>
+	<type>modification</type>
+	<install for="1.0 - 1.0.99">
+		<require-file name="GithubIssues.integrate.php" destination="SOURCEDIR" />
+		<require-file name="Githubissues.controller.php" destination="CONTROLLERDIR" />
+		<require-file name="GIValuesBag.class.php" destination="SUBSDIR" />
+		<require-file name="Githubber.class.php" destination="SUBSDIR" />
+		<require-file name="GithubIssues.english.php" destination="LANGUAGEDIR/english" />
+		<database>install.php</database>
+	</install>
+	<uninstall for="1.0 - 1.0.99">
+		<remove-file name="SOURCEDIR/GithubIssues.integrate.php" />
+		<remove-file name="CONTROLLERDIR/Githubissues.integrate.php" />
+		<remove-file name="SUBSDIR/GIValuesBag.class.php" />
+		<remove-file name="SUBSDIR/Githubber.class.php" />
+		<remove-file name="LANGUAGEDIR/english/GithubIssues.english.php" />
+		<code>install.php</code>
+	</uninstall>
+</package-info>
