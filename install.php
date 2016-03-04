@@ -50,6 +50,11 @@ $hooks = array(
 		'GithubIssues_Integrate::integrate_display_buttons',
 		'SOURCEDIR/GithubIssues.integrate.php',
 	),
+	array(
+		'integrate_load_permissions',
+		'GithubIssues_Integrate::integrate_load_permissions',
+		'SOURCEDIR/GithubIssues.integrate.php',
+	),
 );
 $mod_name = 'Github Issues';
 

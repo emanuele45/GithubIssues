@@ -14,6 +14,7 @@ class GithubIssues_Integrate
 	protected static $boardsList = null;
 	protected static $id_issue = null;
 	protected static $id_first_msg = null;
+	protected static $push_issues = false;
 
 	public static function integrate_general_mod_settings(&$config_vars)
 	{
@@ -30,11 +31,17 @@ class GithubIssues_Integrate
 		$config_vars[] = array('large_text', 'ghissues_bodytemplate', 'subtext' => $txt['ghissues_bodytemplate_desc']);
 	}
 
+	public static function integrate_load_permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions, &$relabelPermissions)
+	{
+		loadLanguage('GithubIssues');
+		$permissionList['board']['ghissues_push'] = array(false, 'topic');
+	}
+
 	public static function integrate_prepare_display_context(&$output, &$message)
 	{
 		global $context, $txt, $scripturl, $board;
 
-		if (self::isBoardEnabled($board) === false)
+		if (self::isBoardEnabled($board) === false || self::$push_issues === false)
 		{
 			return;
 		}
@@ -66,7 +73,7 @@ class GithubIssues_Integrate
 		}
 
 		$context['additional_drop_buttons']['ghissues_push'] = array(
-			'href' => $scripturl . '?action=githubissues;id_msg=' . $output['id'],
+			'href' => $scripturl . '?action=githubissues;id_msg=' . $output['id'] . ';board=' . $board,
 			'text' => $txt['ghissues_push']
 		);
 	}
@@ -86,6 +93,7 @@ class GithubIssues_Integrate
 	{
 		self::$id_issue = $topicinfo['id_issue'];
 		self::$id_first_msg = $topicinfo['id_first_msg'];
+		self::$push_issues = allowedTo('ghissues_push');
 	}
 
 	public static function integrate_display_buttons()

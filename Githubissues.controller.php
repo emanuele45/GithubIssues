@@ -45,6 +45,7 @@ class GithubIssues_Controller
 			'body_template' => $modSettings['ghissues_bodytemplate'],
 		), database());
 
+		loadLanguage('GithubIssues');
 		isAllowedTo('ghissues_push');
 
 		$return = array();
