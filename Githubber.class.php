@@ -76,6 +76,12 @@ class Githubber
 		}
 		else
 		{
+			// No issue? Sorry, without that there can't be comments...
+			if (empty($this->_message_info->id_issue))
+			{
+				return false;
+			}
+
 			// The user can access this message if it's approved or they're owner
 			if ($this->_message_info->approved == 0)
 			{
